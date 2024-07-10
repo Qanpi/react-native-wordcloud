@@ -11,6 +11,7 @@ export default class Word {
     this.fontFactor = wordConfig.fontFactor
     this.fontOffset = wordConfig.fontOffset
     this.minValue = wordConfig.minValue
+    this.render = wordConfig.render
 
     this.fontFamily = wordConfig.fontFamily
     this.font = null
@@ -18,7 +19,7 @@ export default class Word {
     if (this.color === null || this.color === "") {
       this.color = Util.getRandomColor()
     }
-    this.view = null
+
     this.width = null
     this.height = null
     this._init()

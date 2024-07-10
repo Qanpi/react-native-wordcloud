@@ -23,6 +23,8 @@ class WordCloud extends React.Component {
       yOffset: props.options.height / 2,
     }
 
+    this.renderWord = props.renderWord
+
     this._placeFirstWord = this._placeFirstWord.bind(this)
     this._placeOtherWord = this._placeOtherWord.bind(this)
   }
@@ -58,6 +60,7 @@ class WordCloud extends React.Component {
     const wordsArray = initialWords.map((wordConfig, index) => {
       const word = new Word({
         ...wordConfig,
+        render: this.renderWord,
         minValue: _minValue,
         maxValue: _maxValue,
         fontFactor,
@@ -138,9 +141,7 @@ class WordCloud extends React.Component {
               ...prevWord,
               view:
                 (prevWord.view && (
-                  <Text key={word.text} style={textStyle}>
-                    {word.text}
-                  </Text>
+                 this.renderWord(word.text, textStyle) 
                 )) ||
                 null,
             }
@@ -446,6 +447,7 @@ WordCloud.propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
     fontFamily: PropTypes.string,
+    renderText: PropTypes.func,
   }).isRequired,
 }
 
@@ -459,6 +461,7 @@ WordCloud.defaultProps = {
     width: 300,
     height: 200,
     fontFamily: "",
+    renderText: <Text></Text>
   },
 }
 
